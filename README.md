@@ -1,1 +1,1 @@
-Use your mouse to pop the bubbles before they fil up your screen.
+Use your mouse to pop the bubbles before they fill up your screen.
