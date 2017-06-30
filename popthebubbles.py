@@ -69,22 +69,20 @@ def main():
         
         def update(self):
             screen.blit(self.image, (self.rect))
-            if self.rect.y <= 5:
-                self.rect.y = 5
+            if self.rect.y <= 0:
+                self.rect.y = 0
 
             elif self.rect.y <= 750:
                 self.rect.y -= self.speed
                 mouse_pos = pygame.mouse.get_pos()
                 mouse_clicked = pygame.mouse.get_pressed()
+                
                 if self.rect.collidepoint(*mouse_pos) and mouse_clicked[0]:
                     pop = pygame.image.load("bubblepop.png").convert_alpha()
                     pop = pygame.transform.scale(pop, (135, 125))
                     self.image = pop
                     screen.blit(pop, (mouse_pos))
                     self.kill()
-                    pygame.time.delay(10)
-                    self.rect.y = 1000
-                    self.rect.x = 1000
 
     # all_bubbles = [Bubble_Creation(), Bubble_Creation()]
     # all_bubbles.create() 
@@ -119,7 +117,7 @@ def main():
 
         bubble_cooldown -= 1
         if len(bubble_list) < max_bubbles and bubble_cooldown <= 0:
-            Bubble("bubble.png", random.randint(5, 680), 710, random.randint(2,7))
+            Bubble("bubble.png", random.randint(5, 680), 710, random.randint(2,5))
             bubble_cooldown = bubble_delay
 
             # for i in range(len(all_bubbles.bubble_list)): 
@@ -133,8 +131,9 @@ def main():
 
         # Game display
         # screen.blit(bubble.image, (bubble.rect))
-        
-        pygame.display.update()
+        allSprites.clear(screen, background)
+        allSprites.update()
+        pygame.display.flip()
         clock.tick(60)
 
     pygame.quit()
