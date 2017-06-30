@@ -37,23 +37,29 @@ def main():
     pygame.display.set_caption("Pop the Bubbles!")
     clock = pygame.time.Clock()
 
-    font = pygame.font.Font(None, 36)
-    score = 0
+    # font = pygame.font.Font(None, 36)
+    # score = 0
 
     class Bubble_Creation(object):
         def __init__(self):
             self.bubble_list = []
             self.number_of_bubbles = 10
+            # random.randint(1,4)
 
         def create(self):
             for i in range(self.number_of_bubbles):
-                self.bubble_list.append(Bubble("bubble.png", random.randrange(10, 690), 710, 3))
+                self.bubble_list.append(Bubble("bubble.png", random.randint(10, 690), 710, 3))
                 self.number_of_bubbles += 1
+    
+    # class BubbleCompose(object):
+    #     def __init__(self):
+    #         self.all_bubbles = Bubble_Creation()
+    #         self.all_bubbles = self.all_bubbles.create() 
 
 
     class Bubble(pygame.sprite.Sprite):
         def __init__(self, image_file, x, y, speed):
-            pygame.sprite.Sprite.__init__(self)
+            pygame.sprite.Sprite.__init__(self, self.containers)
             self.speed = speed
             self.image = pygame.image.load(image_file).convert_alpha()
             self.image = pygame.transform.scale(self.image, (75, 75))
@@ -61,7 +67,7 @@ def main():
             self.rect.x = x
             self.rect.y = y
         
-        def update(self, score):
+        def update(self):
             screen.blit(self.image, (self.rect))
             if self.rect.y <= 5:
                 self.rect.y = 5
@@ -80,8 +86,16 @@ def main():
                     self.rect.y = 1000
                     self.rect.x = 1000
 
-    all_bubbles = Bubble_Creation()
-    all_bubbles.create() 
+    # all_bubbles = [Bubble_Creation(), Bubble_Creation()]
+    # all_bubbles.create() 
+    allSprites = pygame.sprite.Group()
+    bubble_list = pygame.sprite.Group()
+
+    Bubble.containers = allSprites, bubble_list
+
+    max_bubbles = 100
+    bubble_delay = 60
+    bubble_cooldown = 0
 
     # Game initialization
     stop_game = False
@@ -96,22 +110,25 @@ def main():
 
             if event.type == pygame.QUIT:
                 stop_game = True
-
-        screen.blit(background, (0,0))
         
         # Game logic
+        screen.blit(background, (0,0))
 
-        for i in range(len(all_bubbles.bubble_list)): 
-            all_bubbles.bubble_list[i].update(score)
-            # all_bubbles = Bubble_Creation()
+        for bubble in bubble_list:
+            bubble.update()
+
+        bubble_cooldown -= 1
+        if len(bubble_list) < max_bubbles and bubble_cooldown <= 0:
+            Bubble("bubble.png", random.randint(5, 680), 710, random.randint(2,7))
+            bubble_cooldown = bubble_delay
+
+            # for i in range(len(all_bubbles.bubble_list)): 
+            #     all_bubbles.bubble_list[i].update()
+            # # all_bubbles = Bubble_Creation()
             # all_bubbles.create()
-
-
-        
 
         # Draw background
         # screen.fill(midnight_blue)
-        # screen.blit(background, (0,0))
         
 
         # Game display
