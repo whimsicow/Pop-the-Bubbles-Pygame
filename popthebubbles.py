@@ -40,12 +40,12 @@ def main():
     bubble_time = 0
     font = pygame.font.Font(None, 100)
 
-    max_bubbles = 500
+    max_bubbles = 100
     bubble_delay = 60
     bubble_cooldown = 0
     # pygame.mixer.music.load("bubblepop.wav")
     # font = pygame.font.Font(None, 36)
-    score = 0
+    score = []
     game_over = False
 
     def tick_tock():
@@ -101,9 +101,9 @@ def main():
                     pop = pygame.transform.scale(pop, (135, 125))
                     self.image = pop
                     screen.blit(pop, (mouse_pos))
-                    score += 15
-                    print score
+                    score.append(15)
                     self.kill()
+                    print sum(score)
 
         def collide(self, bubble_list):
             collision = pygame.sprite.spritecollide(self, bubble_list, False, pygame.sprite.collide_circle)
