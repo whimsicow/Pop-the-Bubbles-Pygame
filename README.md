@@ -1,1 +1,1 @@
-Use your mouse to pop the bubbles before they reach the bottom of your screen.
+Click on the bubbles to pop them before they reach the bottom of your screen.
