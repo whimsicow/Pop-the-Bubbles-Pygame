@@ -103,7 +103,6 @@ def main():
                     screen.blit(pop, (mouse_pos))
                     score.append(15)
                     self.kill()
-                    print sum(score)
 
         def collide(self, bubble_list):
             collision = pygame.sprite.spritecollide(self, bubble_list, False, pygame.sprite.collide_circle)
@@ -128,7 +127,7 @@ def main():
             if event.type == pygame.QUIT:
                 close_window = True
             
-            elif game_over:
+            elif sum(score) >= 900:
                 game_over = True
         
         # Draw background
@@ -152,16 +151,26 @@ def main():
 
         # Reload game display
         elif game_over:
-        # If game over is true, draw game over
-            print "Game over."
-            text = font.render("Game over.", True, (midnight_blue), None)
-            text_rect = text.get_rect()
-            text_x = screen.get_width() / 2 - text_rect.width / 2
-            text_y = screen.get_height() / 2 - text_rect.height / 2
-            allSprites.clear(screen, background)
-            allSprites.update(score)
-            screen.blit(text, [text_x, text_y])
-            pygame.display.flip()
+            if sum(score) >= 900:
+                text = font.render("You win!", True, (255, 255, 255), None)
+                text_rect = text.get_rect()
+                text_x = screen.get_width() / 2 - text_rect.width / 2
+                text_y = screen.get_height() / 2 - text_rect.height / 2
+                allSprites.clear(screen, background)
+                allSprites.update(score)
+                screen.blit(text, [text_x, text_y])
+                pygame.display.flip()
+        # If game over is true, and bubbles have reached bottom of screen, draw game over
+            else:
+                print "Game over."
+                text = font.render("Game over.", True, (midnight_blue), None)
+                text_rect = text.get_rect()
+                text_x = screen.get_width() / 2 - text_rect.width / 2
+                text_y = screen.get_height() / 2 - text_rect.height / 2
+                allSprites.clear(screen, background)
+                allSprites.update(score)
+                screen.blit(text, [text_x, text_y])
+                pygame.display.flip()
  
         else:
         # If game isn't over, draw this stuff.
