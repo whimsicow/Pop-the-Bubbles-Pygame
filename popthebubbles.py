@@ -41,7 +41,7 @@ def main():
     font = pygame.font.Font(None, 100)
 
     max_bubbles = 100
-    bubble_delay = 60
+    bubble_delay = 90
     bubble_cooldown = 0
     # pygame.mixer.music.load("bubblepop.wav")
     # font = pygame.font.Font(None, 36)
@@ -151,6 +151,10 @@ def main():
 
         # Reload game display
         elif game_over:
+            # If game over and score over 900, draw you win.
+            for bubble in bubble_list:
+                bubble.speed = 0
+                
             if sum(score) >= 900:
                 text = font.render("You win!", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
@@ -160,7 +164,7 @@ def main():
                 allSprites.update(score)
                 screen.blit(text, [text_x, text_y])
                 pygame.display.flip()
-        # If game over is true, and bubbles have reached bottom of screen, draw game over
+            # If game over and bubbles have reached bottom of screen, draw game over
             else:
                 print "Game over."
                 text = font.render("Game over.", True, (midnight_blue), None)
