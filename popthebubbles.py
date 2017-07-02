@@ -12,8 +12,30 @@ clock = pygame.time.Clock()
 def game_intro(background):
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
-    intro = True
+    intromax_bubbles = 15
+    
+    class IntroBubble(pygame.sprite.Sprite):
+        def __init__(self, image_file, x, y, speed):
+            pygame.sprite.Sprite.__init__(self, self.containers)
+            self.speed = speed
+            self.image = pygame.image.load(image_file).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (75, 75))
+            self.rect = self.image.get_rect()
+            self.rect.x = x
+            self.rect.y = y
+        
+        def update(self):
+            screen.blit(self.image, (self.rect))
+            if self.rect.y <= 0:
+                self.kill()
 
+            elif self.rect.y <= 710 and self.speed != 0:
+                self.rect.y -= self.speed
+                
+    intro = True
+    introbubble_list = pygame.sprite.Group()
+    IntroBubble.containers = introbubble_list
+    
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -21,6 +43,11 @@ def game_intro(background):
                 quit()
             elif event.type == pygame.KEYDOWN:
                 intro = False
+        screen.blit(background, (0,0))
+
+        if len(introbubble_list) < intromax_bubbles:
+                for i in range(random.randint(1,3)):
+                    IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
                 
         text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
         text_rect = text.get_rect()
@@ -33,13 +60,13 @@ def game_intro(background):
         subtext_x = screen.get_width() / 2 - subtext_rect.width / 2
         subtext_y = text_y + text_rect.height + subtext_rect.height
         instructions_x = screen.get_width() / 2 - instructions_rect.width / 2
-        instructions_y = subtext_y + instructions_rect.height + subtext_rect.height
+        instructions_y = 650
 
-        screen.blit(background, (0,0))
+        introbubble_list.update()
         screen.blit(text, [text_x, text_y])
         screen.blit(subtext, [subtext_x, subtext_y])
         screen.blit(instructions,[instructions_x, instructions_y] )
-        pygame.display.update()
+        pygame.display.flip()
         clock.tick(15)
 
 def main(background):
@@ -105,9 +132,6 @@ def main(background):
                 if x.speed == 0:
                     self.speed = 0
 
-
-    # all_bubbles = [Bubble_Creation(), Bubble_Creation()]
-    # all_bubbles.create() 
     allSprites = pygame.sprite.Group()
     bubble_list = pygame.sprite.Group()
     Bubble.containers = allSprites, bubble_list
@@ -145,7 +169,7 @@ def main(background):
             bubble_cooldown -= 1
             if len(bubble_list) < max_bubbles and bubble_cooldown <= 0:
                 for i in range(random.randint(1,3)):
-                    Bubble("bubble.png", random.randint(5, 670), 710, random.randint(1,4))
+                    Bubble("bubble.png", random.randint(0, 670), 710, random.randint(1,4))
                     bubble_cooldown = bubble_delay
 
         # Reload game display
