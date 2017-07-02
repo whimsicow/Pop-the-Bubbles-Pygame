@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 
 def game_intro(background):
     font = pygame.font.Font(None, 100)
-    smallfont = pygame.font.Font(None, 30)
+    smallfont = pygame.font.Font(None, 25)
     intromax_bubbles = 15
     
     class IntroBubble(pygame.sprite.Sprite):
@@ -51,7 +51,7 @@ def game_intro(background):
                 
         text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
         text_rect = text.get_rect()
-        subtext = smallfont.render("Click on the bubbles to pop them before they fill your screen.", True, (255, 255, 255), None)
+        subtext = smallfont.render("Click on the bubbles to pop them before they reach the bottom of your screen.", True, (255, 255, 255), None)
         subtext_rect = subtext.get_rect()
         instructions = smallfont.render("Press any key to begin.", True, (255, 255, 255), None)
         instructions_rect = instructions.get_rect()
@@ -73,12 +73,11 @@ def main(background):
     pygame.init()
     bubble_time = 0
     font = pygame.font.Font(None, 100)
-
+    smallfont = pygame.font.Font(None, 30)
     max_bubbles = 100
     bubble_delay = 90
     bubble_cooldown = 0
     # pygame.mixer.music.load("bubblepop.wav")
-    # font = pygame.font.Font(None, 36)
     score = []
     game_over_list = []
     game_over = False
@@ -131,10 +130,11 @@ def main(background):
             for x in collision:
                 if x.speed == 0:
                     self.speed = 0
-
+    
     allSprites = pygame.sprite.Group()
     bubble_list = pygame.sprite.Group()
     Bubble.containers = allSprites, bubble_list
+    # ScoreText.containers = allSprites
 
     # Game initialization
     close_window = False
@@ -155,6 +155,9 @@ def main(background):
         
         # Draw background
         screen.blit(background, (0,0))
+        scoretext = smallfont.render("Score: %d" % sum(score), True, (255, 255, 255), None)
+        scoretext_rect = scoretext.get_rect()
+        screen.blit(scoretext, [25, 665])
 
         # Game logic
         if not game_over:
@@ -187,6 +190,7 @@ def main(background):
                 allSprites.update(score)
                 screen.blit(text, [text_x, text_y])
                 pygame.display.flip()
+
             # If game over and bubbles have reached bottom of screen, draw game over
             else:
                 text = font.render("Game over.", True, (255, 255, 255), None)
@@ -201,8 +205,8 @@ def main(background):
         else:
         # If game isn't over, render background and sprites.
             allSprites.clear(screen, background)
-            allSprites.update()
-        
+            allSprites.update(score)
+
         pygame.display.flip()
         clock.tick(60)
 
