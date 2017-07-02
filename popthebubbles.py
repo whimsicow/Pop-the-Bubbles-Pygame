@@ -10,7 +10,6 @@ pygame.display.set_caption("Pop the Bubbles!")
 clock = pygame.time.Clock()
 
 def game_intro(background):
-    pygame.init()
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
     intro = True
@@ -20,14 +19,14 @@ def game_intro(background):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-            elif event.type == K_SPACE:
+            elif event.type == pygame.KEYDOWN:
                 intro = False
                 
         text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
         text_rect = text.get_rect()
         subtext = smallfont.render("Click on the bubbles to pop them before they fill your screen.", True, (255, 255, 255), None)
         subtext_rect = subtext.get_rect()
-        instructions = smallfont.render("Press the spacebar to begin.", True, (255, 255, 255), None)
+        instructions = smallfont.render("Press any key to begin.", True, (255, 255, 255), None)
         instructions_rect = instructions.get_rect()
         text_x = screen.get_width() / 2 - text_rect.width / 2
         text_y = screen.get_height() / 2 - text_rect.height / 2 - subtext_rect.height - instructions_rect . height
@@ -66,13 +65,6 @@ def main(background):
                 last_time_ms = int(round(time.time() * 1000))
             else:
                 pass
-
-        def create(self):
-            for i in range(self.number_of_bubbles):
-                self.bubble_list.append(Bubble("bubble.png", random.randint(10, 690), 710, 3))
-                self.number_of_bubbles += 1
-
-
 
     class Bubble(pygame.sprite.Sprite):
         def __init__(self, image_file, x, y, speed):
@@ -122,7 +114,8 @@ def main(background):
 
     # Game initialization
     close_window = False
-    
+    game_intro(background)
+
     while not close_window:
         for event in pygame.event.get():
             # Event handling
@@ -190,6 +183,6 @@ def main(background):
         clock.tick(60)
 
     pygame.quit()
-game_intro(background)
-# if __name__ == '__main__':
-main(background)
+
+if __name__ == '__main__':
+    main(background)
