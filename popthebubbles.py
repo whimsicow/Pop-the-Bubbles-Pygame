@@ -43,6 +43,7 @@ def game_intro(background):
                 quit()
             elif event.type == pygame.KEYDOWN:
                 intro = False
+
         screen.blit(background, (0,0))
 
         if len(introbubble_list) < intromax_bubbles:
@@ -51,7 +52,7 @@ def game_intro(background):
                 
         text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
         text_rect = text.get_rect()
-        subtext = smallfont.render("Click on the bubbles to pop them before they reach the bottom of your screen.", True, (255, 255, 255), None)
+        subtext = smallfont.render("Click on the bubbles to pop them before they reach the top of your screen.", True, (255, 255, 255), None)
         subtext_rect = subtext.get_rect()
         instructions = smallfont.render("Press any key to begin.", True, (255, 255, 255), None)
         instructions_rect = instructions.get_rect()
@@ -109,7 +110,8 @@ def main(background):
                 self.rect.y = 0
                 self.speed = 0
 
-            elif self.rect.bottom >= height and self.speed == 0:
+            elif self.speed == 0 and self.rect.bottom >= screen.get_height():
+                print "Game over."
                 game_over_list.append(True)
 
             elif self.rect.y <= 710 and self.speed != 0:
@@ -148,11 +150,11 @@ def main(background):
             
             elif sum(score) >= 900:
                 game_over = True
-            
-            for x in game_over_list:
+        
+        for x in game_over_list:
                 if x == True:
                     game_over = True
-        
+            
         # Draw background
         screen.blit(background, (0,0))
         scoretext = smallfont.render("Score: %d" % sum(score), True, (255, 255, 255), None)
