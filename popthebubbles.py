@@ -84,7 +84,6 @@ def game_intro(background):
 def main(background):
     pygame.init()
     # Sets up variables and font specifications
-    bubble_time = 0
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
     max_bubbles = 100
@@ -94,16 +93,6 @@ def main(background):
     score = []
     game_over_list = []
     game_over = False
-
-    def tick_tock():
-        last_time_ms = int(round(time.time() * 1000))
-        while True:
-            diff_time_ms = int(round(time.time() * 1000)) - last_time_ms
-            if(diff_time_ms >= 4000):
-                bubble_time += 1
-                last_time_ms = int(round(time.time() * 1000))
-            else:
-                pass
     
     # Main game Bubble specifications
     class Bubble(pygame.sprite.Sprite):
@@ -136,7 +125,7 @@ def main(background):
                 if self.rect.collidepoint(*mouse_pos) and mouse_clicked[0]:
                     pop = pygame.image.load("bubblepop.png").convert_alpha()
                     pop = pygame.transform.scale(pop, (135, 125))
-                    # Shows pop image once bubbles are clickec
+                    # Shows pop image once bubbles are clicked
                     self.image = pop
                     screen.blit(pop, (mouse_pos))
                     score.append(15)
