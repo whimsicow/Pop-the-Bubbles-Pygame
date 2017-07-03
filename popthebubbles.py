@@ -110,8 +110,7 @@ def main(background):
                 self.rect.y = 0
                 self.speed = 0
 
-            elif self.speed == 0 and self.rect.bottom >= screen.get_height():
-                print "Game over."
+            elif self.speed == 0 and self.rect.bottom >= 690:
                 game_over_list.append(True)
 
             elif self.rect.y <= 710 and self.speed != 0:
@@ -152,8 +151,8 @@ def main(background):
                 game_over = True
         
         for x in game_over_list:
-                if x == True:
-                    game_over = True
+            if x == True:
+                game_over = True
             
         # Draw background
         screen.blit(background, (0,0))
