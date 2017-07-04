@@ -89,7 +89,7 @@ def main(background):
     max_bubbles = 100
     bubble_delay = 90
     bubble_cooldown = 0
-    pygame.mixer.music.load("TinyBubbles.wav")
+    pygame.mixer.music.load("TinyBubbles.mp3")
     pygame.mixer.music.play(0)
     score = []
     game_over_list = []
@@ -195,23 +195,55 @@ def main(background):
             if sum(score) >= 900:
                 text = font.render("You win!", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
+                subtext = smallfont.render("Press any key to play again.", True, (255, 255, 255), None)
+                subtext_rect = subtext.get_rect()
                 text_x = screen.get_width() / 2 - text_rect.width / 2
                 text_y = screen.get_height() / 2 - text_rect.height / 2
+                subtext_x = screen.get_width() / 2 - subtext_rect.width / 2
+                subtext_y = text_y + text_rect.height + subtext_rect.height
                 allSprites.clear(screen, background)
                 allSprites.update(score)
                 screen.blit(text, [text_x, text_y])
+                screen.blit(subtext, [subtext_x, subtext_y])
                 pygame.display.flip()
+                for event in pygame.event.get():
+                    # Ends game if user exits screen
+                    if event.type == pygame.QUIT:
+                        close_window = True
+                    # Loops through game again if key pressed
+                    elif event.type == pygame.KEYDOWN:
+                        score = []
+                        game_over_list = []
+                        allSprites.empty()
+                        bubble_list.empty()
+                        game_over = False
 
-            # If game over and bubbles have reached bottom of screen, draw game over
+            # If game over and stopped bubbles have reached bottom of screen, draw game over
             else:
                 text = font.render("Game over.", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
+                subtext = smallfont.render("Press any key to play again.", True, (255, 255, 255), None)
+                subtext_rect = subtext.get_rect()
                 text_x = screen.get_width() / 2 - text_rect.width / 2
                 text_y = screen.get_height() / 2 - text_rect.height / 2
+                subtext_x = screen.get_width() / 2 - subtext_rect.width / 2
+                subtext_y = text_y + text_rect.height + subtext_rect.height
                 allSprites.clear(screen, background)
                 allSprites.update(score)
                 screen.blit(text, [text_x, text_y])
+                screen.blit(subtext, [subtext_x, subtext_y])
                 pygame.display.flip()
+                for event in pygame.event.get():
+                    # Ends game if user exits screen
+                    if event.type == pygame.QUIT:
+                        close_window = True
+                    # Loops through game again if key pressed
+                    if event.type == pygame.KEYDOWN:
+                        score = []
+                        game_over_list = []
+                        allSprites.empty()
+                        bubble_list.empty()
+                        game_over = False
  
         else:
         # If game isn't over, render background and sprites.
