@@ -89,7 +89,8 @@ def main(background):
     max_bubbles = 100
     bubble_delay = 90
     bubble_cooldown = 0
-    # pygame.mixer.music.load("bubblepop.wav")
+    pygame.mixer.music.load("TinyBubbles.wav")
+    pygame.mixer.music.play(0)
     score = []
     game_over_list = []
     game_over = False
@@ -157,7 +158,7 @@ def main(background):
             # Indicates game is over once score of 900 reached
             elif sum(score) >= 900:
                 game_over = True
-        # Indicates game is over once stopped bubbles reach bottom of screen
+        # Checks to see if any bubbles have reached the bottom of the scren, if so, indicates game is over
         for x in game_over_list:
             if x == True:
                 game_over = True
