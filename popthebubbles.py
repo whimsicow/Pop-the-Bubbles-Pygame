@@ -86,9 +86,8 @@ def main(background):
     # Sets up variables and font specifications
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
-    max_bubbles = 100
-    bubble_delay = 90
-    bubble_cooldown = 0
+    bubble_drop = 25
+    pygame.time.set_timer(bubble_drop, 3000)
     pygame.mixer.music.load("TinyBubbles.mp3")
     pygame.mixer.music.play(0)
     score = []
@@ -155,6 +154,9 @@ def main(background):
             # Ends game if user exits screen
             if event.type == pygame.QUIT:
                 close_window = True
+            if event.type == bubble_drop:
+                for i in range(random.randint(1,3)):
+                    Bubble("bubble.png", random.randint(0, 670), 710, random.randint(1,4))
             # Indicates game is over once score of 900 reached
             elif sum(score) >= 900:
                 game_over = True
@@ -178,14 +180,7 @@ def main(background):
                 bubble_list.remove(bubble)
                 bubble.collide(bubble_list)
                 bubble_list.add(bubble)
-            
-            # Generates 1-3 bubbles with random speed and x poistion, slight delay due to bubble_cooldown/bubble_delay variables
-            bubble_cooldown -= 1
-            if len(bubble_list) < max_bubbles and bubble_cooldown <= 0:
-                for i in range(random.randint(1,3)):
-                    Bubble("bubble.png", random.randint(0, 670), 710, random.randint(1,4))
-                    bubble_cooldown = bubble_delay
-
+                
         # Reload game display
         elif game_over:
             # Stops all bubbles once game is over
