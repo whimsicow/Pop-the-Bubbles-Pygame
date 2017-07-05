@@ -1,8 +1,8 @@
+# Level 2
+
 import pygame, sys, random, time
 from pygame.locals import *
-import level2
 
-# Sets up specifications for screen, loads background image
 width = 700
 height = 700
 screen = pygame.display.set_mode((width, height))
@@ -11,37 +11,14 @@ background = pygame.transform.scale(background, (1280, 800))
 pygame.display.set_caption("Pop the Bubbles!")
 clock = pygame.time.Clock()
 
-# game intro function
-def game_intro(background):
+def level2_intro(background):
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 25)
     intromax_bubbles = 15
     
-    # Specifications for bubbles in intro screen
-    class IntroBubble(pygame.sprite.Sprite):
-        def __init__(self, image_file, x, y, speed):
-            pygame.sprite.Sprite.__init__(self, self.containers)
-            self.speed = speed
-            self.image = pygame.image.load(image_file).convert_alpha()
-            self.image = pygame.transform.scale(self.image, (75, 75))
-            self.rect = self.image.get_rect()
-            self.rect.x = x
-            self.rect.y = y
-        
-        def update(self):
-            screen.blit(self.image, (self.rect))
-            # Removes bubbles from all groups once they reach the top of the screen
-            if self.rect.y <= 0:
-                self.kill()
-
-            # Allows bubbles to move from the bottom to the top of the screen
-            elif self.rect.y <= 710:
-                self.rect.y -= self.speed
                 
-    intro = True
+    level2intro = True
     # Assigns all bubbles in list to sprite group
-    introbubble_list = pygame.sprite.Group()
-    IntroBubble.containers = introbubble_list
     
     while intro:
         for event in pygame.event.get():
@@ -54,45 +31,31 @@ def game_intro(background):
                 intro = False
         # Prints underwater background image
         screen.blit(background, (0,0))
-
-        # Prints more bubbles to screen when there are less than specified # of max bubbles on screen
-        if len(introbubble_list) < intromax_bubbles:
-            for i in range(random.randint(1,3)):
-                IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
         
         # Renders text and subtext        
-        text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
+        text = font.render("Level 2", True, (255, 255, 255), None)
         text_rect = text.get_rect()
-        subtext = smallfont.render("Click on the bubbles to pop them before they reach the top of your screen.", True, (255, 255, 255), None)
+        subtext = smallfont.render("Press any key to continue.", True, (255, 255, 255), None)
         subtext_rect = subtext.get_rect()
-        instructions = smallfont.render("Press any key to begin.", True, (255, 255, 255), None)
-        instructions_rect = instructions.get_rect()
         text_x = screen.get_width() / 2 - text_rect.width / 2
         text_y = screen.get_height() / 2 - text_rect.height / 2 - subtext_rect.height - instructions_rect . height
         subtext_x = screen.get_width() / 2 - subtext_rect.width / 2
         subtext_y = text_y + text_rect.height + subtext_rect.height
-        instructions_x = screen.get_width() / 2 - instructions_rect.width / 2
-        instructions_y = 650
 
         # Prints text and bubbles
-        introbubble_list.update()
         screen.blit(text, [text_x, text_y])
         screen.blit(subtext, [subtext_x, subtext_y])
-        screen.blit(instructions,[instructions_x, instructions_y])
         pygame.display.flip()
         clock.tick(15)
 
-def main(background):
+def level2(background, score):
     pygame.init()
     # Sets up variables and font specifications
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
-    # Sets timer for new batch of bubbles to be created every 3 seconds
+    # Sets timer for new batch of bubbles to be created every 2.5 seconds
     bubble_drop = 25
-    pygame.time.set_timer(bubble_drop, 3000)
-    pygame.mixer.music.load("TinyBubbles.mp3")
-    pygame.mixer.music.play(0)
-    score = []
+    pygame.time.set_timer(bubble_drop, 2500)
     game_over_list = []
     game_over = False
     
@@ -148,20 +111,18 @@ def main(background):
 
     # Game initialization
     close_window = False
-    # Plays intro
-    game_intro(background)
 
     while not close_window:
         for event in pygame.event.get():
             # Ends game if user exits screen
             if event.type == pygame.QUIT:
                 close_window = True
-            # Creates new batch of bubbles if 3 seconds have passed
+            # Creates new batch of bubbles if 2.5 seconds have passed
             if event.type == bubble_drop:
                 for i in range(random.randint(1,3)):
                     Bubble("bubble.png", random.randint(0, 670), 710, random.randint(1,4))
             # Indicates game is over once score of 900 reached
-            elif sum(score) >= 900:
+            elif sum(score) >= 1800:
                 game_over = True
         # Checks to see if any bubbles have reached the bottom of the scren, if so, indicates game is over
         for x in game_over_list:
@@ -178,7 +139,7 @@ def main(background):
         if not game_over:
             for bubble in bubble_list:
                 bubble.update(score)
-            # Iterates through bubble list, checks for collisions, removes bubble and adds it back to ensure it does not detect the bubble colliding with itself
+    # Iterates through bubble list, checks for collisions, removes bubble and adds it back to ensure it does not detect the bubble colliding with itself
             for bubble in bubble_list:
                 bubble_list.remove(bubble)
                 bubble.collide(bubble_list)
@@ -190,10 +151,10 @@ def main(background):
             for bubble in bubble_list:
                 bubble.speed = 0
             # If game over and score over 900, draw you win
-            if sum(score) >= 900:
+            if sum(score) >= 1800:
                 text = font.render("You win!", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
-                subtext = smallfont.render("Press any key to continue to level 2.", True, (255, 255, 255), None)
+                subtext = smallfont.render("Press any key to play again.", True, (255, 255, 255), None)
                 subtext_rect = subtext.get_rect()
                 text_x = screen.get_width() / 2 - text_rect.width / 2
                 text_y = screen.get_height() / 2 - text_rect.height / 2
@@ -208,12 +169,13 @@ def main(background):
                     # Ends game if user exits screen
                     if event.type == pygame.QUIT:
                         close_window = True
-                    # Continues to level 2
+                    # Loops through game again if key pressed
                     elif event.type == pygame.KEYDOWN:
+                        score = []
                         game_over_list = []
                         allSprites.empty()
                         bubble_list.empty()
-                        level2.level2(background, score)
+                        game_over = False
 
             # If game over and stopped bubbles have reached bottom of screen, draw game over
             else:
@@ -251,6 +213,3 @@ def main(background):
         clock.tick(60)
 
     pygame.quit()
-
-if __name__ == '__main__':
-    main(background)
