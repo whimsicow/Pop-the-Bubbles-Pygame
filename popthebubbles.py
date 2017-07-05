@@ -193,7 +193,7 @@ def main(background):
             if sum(score) >= 900:
                 text = font.render("You win!", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
-                subtext = smallfont.render("Press any key to continue to level 2.", True, (255, 255, 255), None)
+                subtext = smallfont.render("Press any key to continue to Level 2", True, (255, 255, 255), None)
                 subtext_rect = subtext.get_rect()
                 text_x = screen.get_width() / 2 - text_rect.width / 2
                 text_y = screen.get_height() / 2 - text_rect.height / 2
@@ -208,7 +208,7 @@ def main(background):
                     # Ends game if user exits screen
                     if event.type == pygame.QUIT:
                         close_window = True
-                    # Continues to level 2
+                    # Continues to level 2 if key pressed
                     elif event.type == pygame.KEYDOWN:
                         game_over_list = []
                         allSprites.empty()

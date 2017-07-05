@@ -1,8 +1,7 @@
-# Level 2
+# Level 3
 
 import pygame, sys, random, time
 from pygame.locals import *
-import level3
 
 width = 700
 height = 700
@@ -12,14 +11,14 @@ background = pygame.transform.scale(background, (1280, 800))
 pygame.display.set_caption("Pop the Bubbles!")
 clock = pygame.time.Clock()
 
-def level2(background, score):
+def level3(background, score):
     pygame.init()
     # Sets up variables and font specifications
     font = pygame.font.Font(None, 100)
     smallfont = pygame.font.Font(None, 30)
-    # Sets timer for new batch of bubbles to be created every 2.5 seconds
+    # Sets timer for new batch of bubbles to be created every 2 seconds
     bubble_drop = 25
-    pygame.time.set_timer(bubble_drop, 2500)
+    pygame.time.set_timer(bubble_drop, 2000)
     game_over_list = []
     game_over = False
     
@@ -86,7 +85,7 @@ def level2(background, score):
                 for i in range(random.randint(1,3)):
                     Bubble("bubble.png", random.randint(0, 670), 710, random.randint(1,4))
             # Indicates game is over once score of 900 reached
-            elif sum(score) >= 1800:
+            elif sum(score) >= 3000:
                 game_over = True
         # Checks to see if any bubbles have reached the bottom of the scren, if so, indicates game is over
         for x in game_over_list:
@@ -114,11 +113,11 @@ def level2(background, score):
             # Stops all bubbles once game is over
             for bubble in bubble_list:
                 bubble.speed = 0
-            # If game over and score over 1800, draw you win
-            if sum(score) >= 1800:
+            # If game over and score over 3000, draw you win
+            if sum(score) >= 3000:
                 text = font.render("You win!", True, (255, 255, 255), None)
                 text_rect = text.get_rect()
-                subtext = smallfont.render("Press any key to continue to Level 3", True, (255, 255, 255), None)
+                subtext = smallfont.render("Press any key to play again.", True, (255, 255, 255), None)
                 subtext_rect = subtext.get_rect()
                 text_x = screen.get_width() / 2 - text_rect.width / 2
                 text_y = screen.get_height() / 2 - text_rect.height / 2
@@ -133,12 +132,13 @@ def level2(background, score):
                     # Ends game if user exits screen
                     if event.type == pygame.QUIT:
                         close_window = True
-                    # Continues to level3 if key pressed
+                    # Loops through game again if key pressed
                     elif event.type == pygame.KEYDOWN:
+                        score = []
                         game_over_list = []
                         allSprites.empty()
                         bubble_list.empty()
-                        level3.level3(background, score)
+                        game_over = False
 
             # If game over and stopped bubbles have reached bottom of screen, draw game over
             else:
