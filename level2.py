@@ -3,7 +3,10 @@
 import pygame, sys, random, time
 from pygame.locals import *
 import level3
+<<<<<<< HEAD
 import popthebubbles
+=======
+>>>>>>> a54ba45d77f421c1a33ace8d4c0c405b3b6c6d95
 
 width = 700
 height = 700
@@ -160,13 +163,21 @@ def level2(background, score):
                     # Ends game if user exits screen
                     if event.type == pygame.QUIT:
                         close_window = True
+<<<<<<< HEAD
                     # Goes back to Level 1 if key pressed
+=======
+                    # Loops through game again if key pressed
+>>>>>>> a54ba45d77f421c1a33ace8d4c0c405b3b6c6d95
                     elif event.type == pygame.KEYDOWN:
                         score = []
                         game_over_list = []
                         allSprites.empty()
                         bubble_list.empty()
+<<<<<<< HEAD
                         popthebubbles.main(background)
+=======
+                        game_over = False
+>>>>>>> a54ba45d77f421c1a33ace8d4c0c405b3b6c6d95
  
         else:
         # If game isn't over, render background and sprites.

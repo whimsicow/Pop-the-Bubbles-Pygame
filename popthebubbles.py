@@ -19,6 +19,7 @@ def game_intro(background):
     # Sets timer for new batch of bubbles to be created every second
     introbubble_drop = 26
     pygame.time.set_timer(introbubble_drop, 2000)
+    intromax_bubbles = 15
     
     # Specifications for bubbles in intro screen
     class IntroBubble(pygame.sprite.Sprite):
@@ -61,6 +62,34 @@ def game_intro(background):
                 intro = False
         # Prints underwater background image
         screen.blit(background, (0,0))
+        
+        # Renders text and subtext        
+        text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
+        text_rect = text.get_rect()
+        subtext = smallfont.render("Click on the bubbles to pop them before they reach the top of your screen.", True, (255, 255, 255), None)
+        subtext_rect = subtext.get_rect()
+        instructions = smallfont.render("Press any key to begin.", True, (255, 255, 255), None)
+        instructions_rect = instructions.get_rect()
+        text_x = screen.get_width() / 2 - text_rect.width / 2
+        text_y = screen.get_height() / 2 - text_rect.height / 2 - subtext_rect.height - instructions_rect . height
+        subtext_x = screen.get_width() / 2 - subtext_rect.width / 2
+        subtext_y = text_y + text_rect.height + subtext_rect.height
+        instructions_x = screen.get_width() / 2 - instructions_rect.width / 2
+        instructions_y = 650
+
+        # Prints text and bubbles
+        introbubble_list.update()
+        screen.blit(text, [text_x, text_y])
+        screen.blit(subtext, [subtext_x, subtext_y])
+        screen.blit(instructions,[instructions_x, instructions_y])
+        pygame.display.flip()
+        clock.tick(15)
+
+
+        # Prints more bubbles to screen when there are less than specified # of max bubbles on screen
+        if len(introbubble_list) < intromax_bubbles:
+            for i in range(random.randint(1,3)):
+                IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
         
         # Renders text and subtext        
         text = font.render("Pop the Bubbles", True, (255, 255, 255), None)
