@@ -2,6 +2,7 @@
 
 import pygame, sys, random, time
 from pygame.locals import *
+import popthebubbles
 
 width = 700
 height = 700
@@ -159,13 +160,13 @@ def level3(background, score):
                     # Ends game if user exits screen
                     if event.type == pygame.QUIT:
                         close_window = True
-                    # Loops through game again if key pressed
+                    # Goes back to Level 1 if key pressed
                     elif event.type == pygame.KEYDOWN:
                         score = []
                         game_over_list = []
                         allSprites.empty()
                         bubble_list.empty()
-                        game_over = False
+                        popthebubbles.main(background)
  
         else:
         # If game isn't over, render background and sprites.
