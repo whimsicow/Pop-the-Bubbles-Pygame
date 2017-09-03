@@ -9,7 +9,7 @@
 <h2>Code Snippets:</h2>
 
 <h5>Logic for game intro screen:</h5>
-```python
+``` python
 
 intro = True
 
