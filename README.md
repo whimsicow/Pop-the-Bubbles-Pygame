@@ -8,24 +8,9 @@
 
 <h2>Code Snippets:</h2>
 
-<h5>Logic for game intro screen:</h5>
-```python
-
-intro = True
-
- while intro:
-     for event in pygame.event.get():
-         # Exits game when screen is closed
-         if event.type == pygame.QUIT:
-             pygame.quit()
-             quit()
-         # Prints more bubbles to screen every second
-         elif event.type == introbubble_drop:
-             for i in range(random.randint(2,3)):
-                 IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
-         # Exits intro screen when key is pressed
-         elif event.type == pygame.KEYDOWN:
-             intro = False ```
+<img src="introscreen.png" alt="Intro screen for Pop the Bubbles game">
+<h5>Intro screen for the game</h5>
+<br />
 
 <img src="bubbleclass.png" alt="Code for Bubble class">
 <h5>Shows creation of bubble class.</h5>
