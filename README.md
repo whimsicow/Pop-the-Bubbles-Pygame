@@ -7,8 +7,25 @@
 <h5>After you have downloaded Python, either clone or download this repository. Finally, open your terminal in Mac or Command Prompt in Windows, change into this repository file in your terminal, and type: python popthebubbles.py </h5>
 
 <h2>Code Snippets:</h2>
-<img src="introcode.png" alt="Code for intro screen">
-<h5>Logic for game intro screen</h5>
+
+<h5>Logic for game intro screen:</h5>
+```
+   intro = True
+    
+    while intro:
+        for event in pygame.event.get():
+            # Exits game when screen is closed
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            # Prints more bubbles to screen every second
+            elif event.type == introbubble_drop:
+                for i in range(random.randint(2,3)):
+                    IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
+            # Exits intro screen when key is pressed
+            elif event.type == pygame.KEYDOWN:
+                intro = False
+```
 <br />
 
 <img src="bubbleclass.png" alt="Code for Bubble class">
