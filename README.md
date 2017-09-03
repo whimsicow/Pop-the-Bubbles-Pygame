@@ -9,7 +9,7 @@
 <h2>Code Snippets:</h2>
 
 <h5>Logic for game intro screen:</h5>
-``` python
+```python
 
 intro = True
 
@@ -25,9 +25,7 @@ intro = True
                  IntroBubble("bubble.png", random.randint(0, 680), 710, random.randint(1,4))
          # Exits intro screen when key is pressed
          elif event.type == pygame.KEYDOWN:
-             intro = False
-             
-             ```
+             intro = False ```
 
 <img src="bubbleclass.png" alt="Code for Bubble class">
 <h5>Shows creation of bubble class.</h5>
