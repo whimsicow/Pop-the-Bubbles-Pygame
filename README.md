@@ -13,7 +13,7 @@
 <br />
 
 <img src="bubbleclass.png" alt="Code for Bubble class">
-<h5>Shows creation of bubble class.</h5>
+<h5>Creation of bubble class</h5>
 <br />
 
 <img src="collisioncode.png" alt="Code for collision of bubbles">
