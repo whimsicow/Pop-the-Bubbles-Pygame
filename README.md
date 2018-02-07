@@ -30,7 +30,7 @@
 <h5>Intro screen for the game</h5>
 <br />
 <img src="gameplay.png" alt="Screenshot during gameplay">
-<h5>User must use their mouse to pop the bubbles during gameplay</h5>
+<h5>User must use their mouse or trackpad to pop the bubbles during gameplay</h5>
 <br />
 <img src="gameoverscreen.png" alt="Screenshot of game ending when bubbles fill the screen">
 <h5>The game ends when any stopped bubble reaches the bottom of your screen.</h5>
