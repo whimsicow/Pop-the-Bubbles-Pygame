@@ -21,7 +21,7 @@
 <br />
 
 <img src="maingamelogic.png" alt="Main game logic code">
-<h5>Code for main game loop. Game will continue as long as score is under 900 and no stopped bubbles have reached the bottom of the screen. Also generates between 1-3 bubbles every 3 seconds (based on set timer for bubble drop event).</h5>
+<h5>Code for main game loop. Game will continue as long as score is under 900 and no stopped bubbles have reached the bottom of the screen. Also generates between 1-3 bubbles every three seconds (based on set timer for bubble drop event).</h5>
 <br />
 
 
