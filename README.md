@@ -9,7 +9,7 @@
 <h2>Code Snippets:</h2>
 
 <img src="introscreen.png" alt="Intro screen for Pop the Bubbles game">
-<h5>Intro screen for the game</h5>
+<h5>Intro screen</h5>
 <br />
 
 <img src="bubbleclass.png" alt="Code for Bubble class">
