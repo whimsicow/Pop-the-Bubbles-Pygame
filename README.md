@@ -26,7 +26,7 @@
 
 
 <h2>Screenshots:</h2>
-<img src="introscreen.png" alt="Intro screen for Pop the Bubbles game">
+<img src="introscreen.png" alt="Intro screen for the game">
 <h5>Intro screen for the game</h5>
 <br />
 <img src="gameplay.png" alt="Screenshot during gameplay">
