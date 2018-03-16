@@ -4,7 +4,7 @@
 <h2>How to Download Python and Play the Game:<h2>
 <h5>Go to this site to download Python: https://www.python.org/downloads/ This Pygame was created using Python version 2.7.13.</h5>
 
-<h5>After you have downloaded Python, either clone or download this repository. Finally, open your terminal in Mac or Command Prompt in Windows, change into this repository directory in your terminal, and type: python popthebubbles.py </h5>
+<h5>After you have downloaded Python, either clone or download this repository. Finally, open your terminal in Mac or Command Prompt in Windows, cd into this repository directory in your terminal, and type: python popthebubbles.py </h5>
 
 <h2>Code Snippets:</h2>
 
